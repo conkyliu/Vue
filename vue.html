@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Vue</title>
@@ -35,9 +35,13 @@
         </todo-item>
     </ol>
 </div>
+<div id="app8">
+<p>{{foo}}</p>
+    <button v-on:click="foo = 'baz'">Change it</button>
+</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js" ></script>
 <script src="vue.js"></script>
 
 </body>

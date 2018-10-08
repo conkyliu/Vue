@@ -61,4 +61,14 @@ var app7=new Vue({
         ]
     }
 });
+var obj={foo:'conky'};
+object.freeze(obj);
+var app8=new Vue({
+   el:'#app8',
+    data:obj
+})
+
+
+
+
 
