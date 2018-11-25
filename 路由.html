@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+<script>
+    Vue.use(VueRouter);
+    var Login = {
+        template: `<h1>我是login</h1>`
+    };
+    var Register = {
+        template: `<h1>我是注册页面</h1>`
+    };
+    var router = new VueRouter({
+        routes: [{path: '/login', component: Login}, {name: 'register', path: '/register', component: Register},{name: 'register', path: '/register', component: Register}],
+    });
+    var App = {
+        template: `<div>
+<router-view></router-view>
+<router-link to="/register">注册去 </router-link>
+<router-link :to="{name:'register'}">注册去2 </router-link>
+</div>
+`
+    }
+    new Vue({
+        el: '#app',
+        router: router,
+        components: {
+            app: App
+        },
+        template: `<app/>`
+    })
+
+</script>
+
+</body>
+</html>
