@@ -74,26 +74,62 @@ var app9 = new Vue({
     el: '#app9',
     data: {bb: ['a', 'b', 'c']}
 });
-Vue.set(app9.bb,'gg');
+Vue.set(app9.bb, 'gg');
 
-var appp10=new Vue({
-    el:'#app10',
-    data:{
-        count:0
+var appp10 = new Vue({
+    el: '#app10',
+    data: {
+        count: 0
     }
 });
 
-var app11=new Vue({
-    el:'#app11',
-    data:{
-        name:'hello Vue'
+var app11 = new Vue({
+    el: '#app11',
+    data: {
+        name: 'hello Vue'
     },
     methods: {
-        great:function(e){
+        great: function (e) {
             alert(this.name);
-            if(e){
+            if (e) {
                 alert(e.target.tagName)
             }
         }
     }
+
+});
+var Myheader = {
+    props: ['title'],
+    template: `<h1>我是H1{{ title }}
+<button @click="sshow(123)">弹出</button>
+</h1>`,
+    methods: {
+        sshow: function (num) {
+            alert(num)
+        }
+    }
+};
+
+var App = {
+    components: {
+        'my-header': Myheader
+    },
+    template: `<div>
+<my-header :title="text"></my-header>
+
+
+</div>`,
+    data: function () {
+        return {
+            text: 'qweqweqw'
+        }
+    }
+}
+new Vue({
+    el: '#view',
+    components: {
+        'app': App
+    },
+    template: '<app/>'
+
 });
