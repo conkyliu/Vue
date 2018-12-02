@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app"></div>
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+<script>
+    Vue.use(VueRouter);
+    var isLogin = false;
+    var Login = {
+        template: `<div>我是登录页</div>`,
+        created: function () {
+            isLogin = true
+        }
+    };
+    var Music = {
+        template: `<div>我是音乐页</div>`
+    };
+    var router = new VueRouter();
+    router.addRoutes([
+        {path: "/", redirect: "{name:'login'}"},
+        {name: 'login', path: '/login', component: Login},
+        {name: 'music', path: '/music', component: Music, meta: {isChecked: true}},
+
+
+    ]);
+    router.beforeEach(function (to, from, next) {
+        if (!to.meta.isChecked) {
+            next();
+        } else {
+            if (isLogin) {
+                next()
+            } else {
+                alert('请先登录');
+                next({name: 'login'})
+            }
+        }
+    })
+    var App = {
+        template: `<div>
+<router-link :to="{name:'login'}">去登录页</router-link>
+<router-link :to="{name:'music'}">去音乐页</router-link>
+<router-view></router-view>
+
+</div>`
+    };
+    var vm = new Vue({
+        el: '#app',
+        router: router,
+        components: {
+            app: App
+        },
+        template: `<app/>`
+    })
+
+</script>
+
+</body>
+
+</html>
