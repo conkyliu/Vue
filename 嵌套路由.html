@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>路由</title>
+    <title></title>
 </head>
 <body>
 <div id="app"></div>
@@ -10,25 +10,31 @@
 <script src="vue-router.js"></script>
 <script>
     Vue.use(VueRouter);
+    var Woman={
+        template:`<div>欢迎女士登录</div>`
+    }
     var Login = {
-        template: `<h1>我是login</h1>`
+        template: `<div>我是登录页
+<router-view></router-view></div>`
     };
     var Register = {
-        template: `<h1>我是注册页面</h1>`
+        template: `<div><router-view></router-view></div>`
     };
     var router = new VueRouter({
         routes: [
-            {path: '/login', component: Login},
+            {name:'login',path: '/login', component: Login ,
+                children:[
+                    {name:'login.woman',path:'woman',component:Woman}
+                    ]},
             {name: 'register', path: '/register', component: Register},
 
         ],
     });
     var App = {
         template: `<div>
+<router-link :to="{name:'login.woman'}">去女士登录</router-link>
 <router-view></router-view>
-<router-link to="/login">登录去</router-link>
-<router-link to="/register">注册去 </router-link>
-<router-link :to="{name:'register'}">注册去2 </router-link>
+
 </div>`
     }
     var vm = new Vue({
@@ -39,8 +45,9 @@
         },
         template: `<app/>`
     })
-    console.log(vm.$router)
+
 </script>
 
 </body>
+
 </html>
